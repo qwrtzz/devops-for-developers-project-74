@@ -8,8 +8,8 @@ services:
     command: make dev
     environment:
       - NODE_ENV=development
-    # ports: # не нужен, т.к. доступ через Caddy
-
+    env_file:
+      - .env
   caddy:
     image: caddy:latest
     ports:
