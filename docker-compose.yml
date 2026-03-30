@@ -1,0 +1,7 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    image: qwartzz/devops-for-developers-project-74   # замените на ваш Docker Hub логин
+    command: make test

@@ -1,0 +1,22 @@
+FROM node:20.12.2
+
+WORKDIR /app
+
+# Копируем только файлы зависимостей для кэширования
+COPY app/package.json package.json
+COPY app/package-lock.json package-lock.json
+
+# Устанавливаем все зависимости (включая dev, они нужны для сборки)
+RUN npm ci
+
+# Копируем остальной код
+COPY app/. .
+
+EXPOSE 8080
+ENV NODE_ENV=production
+
+# Сборка фронтенда (если требуется)
+RUN make build
+
+# Запуск в продакшен-режиме
+CMD make start
